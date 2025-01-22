@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { UserService } from '../database/user/user.service';
-import { Session } from '@ory/client';
 import { User } from '@prisma/client';
 import { generateUsername } from 'unique-username-generator';
 import { USERNAME_LENGTH } from '../../config';

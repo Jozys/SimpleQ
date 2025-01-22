@@ -15,7 +15,6 @@ export class AuthMiddleware implements NestMiddleware {
   async use(req: Request, res: any, next: () => void) {
     let result: AxiosResponse<any> | null = null;
     try {
-      console.log(req.headers.authorization);
       result = await axios.get(
         `${process.env.KC_URL}/realms/${process.env.KC_REALM}/protocol/openid-connect/userinfo`,
         {
@@ -24,6 +23,8 @@ export class AuthMiddleware implements NestMiddleware {
           },
         },
       );
+      //@ts-ignore
+      req.userId = result.data.sub;
       if (result?.status != 200) {
         throw new UnauthorizedException('You are not logged in');
       } else {
