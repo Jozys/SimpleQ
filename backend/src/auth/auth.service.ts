@@ -18,20 +18,19 @@ export class AuthService {
    * This method uses an ory session to create a possible user with their ory id inside our database
    * @param session an ory session object
    * */
-  async checkUser(session: Session) {
+  async checkUser(id: string, username: string, email: string) {
     const possibleUser: User | null = await this.userService.getUser(
-      session?.identity?.id as string,
+      id as string,
     );
     if (!possibleUser) {
       await this.userService.createUser(
-        (session.identity?.traits?.username as string) ??
-          (await this.generateUsername()),
+        username as string,
         false,
         false,
         new Date(),
         0,
-        session.identity?.traits.email as string,
-        session?.identity?.id as string,
+        email as string,
+        id as string,
       );
     }
   }

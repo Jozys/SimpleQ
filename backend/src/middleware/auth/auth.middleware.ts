@@ -3,9 +3,9 @@ import {
   NestMiddleware,
   UnauthorizedException,
 } from '@nestjs/common';
-import { AuthService } from '../../auth/auth.service';
-import { Session } from '@ory/client';
+import axios, { AxiosResponse } from 'axios';
 import { Request } from 'express';
+import { AuthService } from '../../auth/auth.service';
 import allowedRequests from './allowed';
 
 @Injectable()
@@ -13,19 +13,28 @@ export class AuthMiddleware implements NestMiddleware {
   constructor(private authService: AuthService) {}
 
   async use(req: Request, res: any, next: () => void) {
-    let result: { data: Session } | null = null;
+    let result: AxiosResponse<any> | null = null;
     try {
-      result = await global.ory.toSession({
-        cookie: req.header('cookie'),
-      });
-      if (result) {
-        if (result.data?.identity?.id) {
-          await this.authService.checkUser(result.data as unknown as Session);
-          //@ts-ignore
-          req.userId = result.data.identity.id;
-        }
+      console.log(req.headers.authorization);
+      result = await axios.get(
+        `${process.env.KC_URL}/realms/${process.env.KC_REALM}/protocol/openid-connect/userinfo`,
+        {
+          headers: {
+            Authorization: `${req.headers.authorization}`,
+          },
+        },
+      );
+      if (result?.status != 200) {
+        throw new UnauthorizedException('You are not logged in');
+      } else {
+        this.authService.checkUser(
+          result.data.sub,
+          result.data.preferred_username,
+          result.data.email,
+        );
       }
     } catch (e) {
+      //console.log(e);
       // Check wether the current path is excluded from the authentication check
       if (allowedRequests.some((a) => new RegExp(a).test(req.baseUrl))) {
         next();
