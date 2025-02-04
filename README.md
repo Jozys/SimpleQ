@@ -1,5 +1,6 @@
 > [!WARNING]
 > Disclaimer: SimpleQ was a project for the lecture "Software Engineering" held in the Baden-Württemberg Cooperative State University (DHBW) in the course TINF22B2. It is not meant to be a realworld application. Consider this project as deprecated and not maintained.
+> The original repository is currently available under [this link](https://github.com/SE-TINF22B2/G6-SimpleQ)
 
 > [!NOTE]
 > One thing that was changed in contrast to the university project is the identity provider that is used. Originally it used a cloud instance from ORY, but for deployment purposes this was changed to Keycloak.
