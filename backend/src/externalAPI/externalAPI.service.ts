@@ -7,6 +7,7 @@ import { UserService } from '../database/user/user.service';
 import { AI_LIMIT } from '../../config';
 import { AIException } from './exceptions/AIException';
 import * as process from 'node:process';
+import OpenAI from 'openai';
 
 @Injectable()
 export class ExternalAPIService {
@@ -16,6 +17,8 @@ export class ExternalAPIService {
     private readonly databaseUserService: UserService,
   ) {}
 
+  showdown = require('showdown');
+  openAI = new OpenAI({ apiKey: process.env.GPT_APP_TOKEN });
   /**
    * This function should check if a user is allowed to use the AI answer generation.
    * @param userID
@@ -141,38 +144,30 @@ export class ExternalAPIService {
     groupID: string,
     userID: string,
   ): Promise<void> {
-    const body = {
-      prompt: prompt,
-    };
-
-    const header = {
-      headers: {
-        Authorization: process.env.GPT_APP_TOKEN,
-      },
-    };
-
     await this.checkAllowed(userID);
     const paramsCheck = await this.checkParams(prompt, groupID);
 
     if (paramsCheck) {
       Logger.log(`REQUEST GPT, >${prompt}<`, 'EXTERNAL API');
-      const gptURL =
-        process.env.GPT_APP_URL != undefined ? process.env.GPT_APP_URL : '';
       let data: any;
       try {
-        data = (
-          await firstValueFrom(
-            this.httpService.post(gptURL, body, header).pipe(),
-          )
-        ).data;
+        const response = await this.openAI.chat.completions.create({
+          model: 'gpt-4o-mini',
+          messages: [
+            { role: 'system', content: 'You are a helpful assistant.' },
+            { role: 'user', content: prompt },
+          ],
+        });
+        data = response.choices[0].message.content;
       } catch (error) {
-        throw new AIException('GPT', `Cannot reach server at >${gptURL}<`);
+        throw new AIException('GPT', `Cannot reach OpenAI server`);
       }
-      if (data.output != null) {
+      if (data != null) {
+        const converter = new this.showdown.Converter();
         await this.databaseContentService.createAnswer(
           null,
           groupID,
-          data.output,
+          converter.makeHtml(data),
           TypeOfAI.GPT,
         );
         Logger.log('GPT successful', 'EXTERNAL API');
