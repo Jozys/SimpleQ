@@ -524,6 +524,11 @@ export class UserContentRequestService {
     type: UserContentType,
     userContentId: string,
   ) {
+    const authorType = creator?.userID
+      ? creator.isPro
+        ? 'pro'
+        : 'user'
+      : 'guest';
     switch (type) {
       case 'Answer':
         const answer = await this.userContentService.getAnswer(userContentId);
@@ -533,13 +538,13 @@ export class UserContentRequestService {
             answer.answer?.typeOfAI != 'None'
               ? answer?.answer?.typeOfAI
               : creator.username,
-          type: answer.answer?.typeOfAI != 'None' ? 'ai' : 'Registered',
+          type: answer.answer?.typeOfAI != 'None' ? 'ai' : authorType,
         };
       default:
         return {
           id: creator?.userID,
           name: creator?.username ?? 'Guest',
-          type: creator?.isPro ? 'pro' : 'registered' ?? 'guest',
+          type: authorType,
         };
     }
   }
