@@ -29,7 +29,7 @@ export class ExternalAPIService {
     if (user == null) {
       throw new AIException('GENERAL', `User ID >${user}< not found`);
     } else if (
-      user.isPro == false &&
+      user.isPro == false ||
       (await this.databaseContentService.countAIAnswersForUser(userID)) >=
         AI_LIMIT
     ) {
