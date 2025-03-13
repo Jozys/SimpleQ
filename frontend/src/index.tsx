@@ -6,7 +6,11 @@ import App from "./pages/App";
 import { Provider as AlertProvider } from "react-alert";
 import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./hooks/auth/AuthProvider";
-
+import "@fontsource/poppins"; // Defaults to weight 400
+import "@fontsource/poppins/500.css"; // Weight 500.
+import "@fontsource/poppins/900-italic.css"; // Italic variant.
+import "@fontsource/poppins/latin.css"; // All styles with latin subset.
+import "@flaticon/flaticon-uicons/css/all/all.css";
 // the style contains only the margin given as offset
 // options contains all alert given options
 // message is the alert message

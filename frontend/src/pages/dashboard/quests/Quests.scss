@@ -10,7 +10,7 @@
 	}
 
 	> .quest-done {
-		background: linear-gradient(45deg, var(--primary-color), transparent 200%), url(https://grainy-gradients.vercel.app/noise.svg);
+		background: linear-gradient(45deg, var(--primary-color), transparent 200%), url(public/noise.svg);
 		color: var(--primary-color-contrast);
 		box-shadow: var(--box-shadow-elevated);
 
