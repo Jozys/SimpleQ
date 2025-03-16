@@ -30,15 +30,15 @@ describe('ExternalAPIService', () => {
     expect(service).toBeDefined();
   });
 
-  it('requestGPT should throw an error: The prompt cannot be empty', async () => {
+  it('requestGPT should throw an error: User is not allowed to access AI', async () => {
     await expect(service.requestGPT('', '', '')).rejects.toThrow(
-      'The prompt cannot be empty',
+      'GENERAL, User >username< has reached the limit for free AI responses',
     );
   });
 
-  it('requestWolfram should throw an error: The prompt cannot be empty', async () => {
+  it('requestWolfram should throw an error: User is not allowed to access AI', async () => {
     await expect(service.requestWolfram('', '', '')).rejects.toThrow(
-      'The prompt cannot be empty',
+      'GENERAL, User >username< has reached the limit for free AI responses',
     );
   });
 

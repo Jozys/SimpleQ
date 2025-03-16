@@ -27,7 +27,7 @@ export class ExternalAPIService {
   private async checkAllowed(userID: string) {
     const user: User | null = await this.databaseUserService.getUser(userID);
     if (user == null) {
-      throw new AIException('GENERAL', `User ID >${user}< not found`);
+      throw new AIException('GENERAL', `User ID >${userID}< not found`);
     } else if (
       user.isPro == false ||
       (await this.databaseContentService.countAIAnswersForUser(userID)) >=
@@ -35,7 +35,7 @@ export class ExternalAPIService {
     ) {
       throw new AIException(
         'GENERAL',
-        `User >${user}< has reached the limit for free AI responses`,
+        `User >${user.username}< has reached the limit for free AI responses`,
       );
     }
   }
