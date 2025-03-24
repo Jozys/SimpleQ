@@ -8,6 +8,7 @@ import { useAlert } from "react-alert";
 import { axiosError } from "../../../def/axios-error";
 import { useNavigate } from "react-router-dom";
 import ButtonGroup from "../../../components/buttongroup/ButtonGroup";
+import useAuth from "../../../hooks/auth/useAuth";
 
 /**
  * Renders the editor page used to ask a new question
@@ -16,6 +17,7 @@ export default function Editor(props: {}) {
   const { t } = useTranslation();
   const alert = useAlert();
   const navigate = useNavigate();
+  const auth = useAuth();
 
   const [title, setTitle] = React.useState("");
   const [tags, setTags] = React.useState<string[]>([]);
@@ -23,11 +25,11 @@ export default function Editor(props: {}) {
     "Describe your question in more detail."
   );
   const [questionType, setQuestionType] = React.useState<"simp" | "users">(
-    "simp"
+    "users"
   );
-  const [selectedAI, setSelectedAI] = React.useState<"gpt" | "wolframAlpha">(
-    "chatgpt"
-  );
+  const [selectedAI, setSelectedAI] = React.useState<
+    "gpt" | "wolframAlpha" | "none"
+  >("none");
 
   const [hasBeenSubmitted, setHasBeenSubmitted] = React.useState(false);
 
@@ -158,7 +160,14 @@ export default function Editor(props: {}) {
             (questionType === "simp" ? " selected" : "")
           }
           onClick={() => {
-            if (hasBeenSubmitted) return;
+            if (
+              hasBeenSubmitted ||
+              auth.getToken() == null ||
+              (import.meta.env.VITE_WOLFRAM_ALPHA_DISABLED === "1" &&
+                import.meta.env.VITE_GPT_DISABLED === "1")
+            ) {
+              return;
+            }
             setQuestionType("simp");
           }}
         >
@@ -175,12 +184,24 @@ export default function Editor(props: {}) {
 
           <ButtonGroup style={{ marginTop: "calc(var(--spacing) / -2)" }}>
             <Button
+              disabled={
+                auth.getToken() == null ||
+                import.meta.env.VITE_WOLFRAM_ALPHA_DISABLED === "1"
+                  ? true
+                  : false
+              }
               buttonStyle={selectedAI === "gpt" ? "primary" : "glass"}
               onClick={async () => setSelectedAI("gpt")}
             >
               ChatGPT
             </Button>
             <Button
+              disabled={
+                auth.getToken() == null ||
+                import.meta.env.VITE_GPT_DISABLED === "1"
+                  ? true
+                  : false
+              }
               buttonStyle={selectedAI === "wolframAlpha" ? "primary" : "glass"}
               onClick={async () => setSelectedAI("wolframAlpha")}
             >
