@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
 
-import mockup from "../../images/macbook-mockup.png";
+import mockup from "../../images/ai-agent.svg";
 
 // Todo: Make logo static!!!
 import logoTodoMakeStatic from "../../images/logo-transparent-TODO-MAKE-STATIC.png";
@@ -137,7 +137,7 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 		
 		<main>
 			<section className={ "page" }>
-				<div className={ "left" }>
+				<div className={ "title-content" }>
 					<div style={ { position: "relative" } }>
 						<div className={ "home-bg-blob" } ref={ b => blobs.push(b) } style={ {
 							top: "-30%",
@@ -158,7 +158,6 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 							powered by <span className={ "highlight" }>AI</span>
 						</h1>
 						<div style={ { display: "flex", gap: "var(--spacing)", alignItems: "center" } }>
-							<h2>You don't believe us?</h2>
 							<Button buttonStyle={ "primary" }
 									onClick={ async () => navigate("dashboard") }>
 								Try Yourself!
@@ -173,7 +172,9 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 					</div>
 				</div>
 				
-				<img src={ mockup } alt={ "Dashboard" }/>
+				<div className={ "mockup" }>
+					<img src={ mockup } alt={ "Dashboard" }/>
+				</div>
 			</section>
 			
 			<section className={ "page" } id={ "features" }>
