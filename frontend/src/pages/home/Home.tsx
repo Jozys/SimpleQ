@@ -309,7 +309,7 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 				</div>
 			</section>
 			
-			<section className={ "page" } id={ "development" }>
+			<section className={ "page" } id={ "development" } style={ { display: "none" } } hidden>
 				<div>
 					<h2 className={ "page-title fade-in" }>Development</h2>
 					<h1 className={ "page-subtitle fade-in" }>Follow and take part in the process</h1>
@@ -367,7 +367,7 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 				</div>
 			</section>
 			
-			<section className={ "page bg-secondary" } id={ "plans" }>
+			<section className={ "page bg-secondary" } id={ "plans" } style={ { display: "none" } } hidden>
 				<div>
 					<h2 className={ "page-title fade-in" }>Meet our Plans</h2>
 					<h1 className={ "page-subtitle fade-in" }>Take the next step</h1>
