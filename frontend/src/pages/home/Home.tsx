@@ -71,8 +71,8 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 				<div className={ "pages" }>
 					<a href={ "#features" }>Features</a>
 					<a href={ "#developers" }>Developers</a>
-					<a href={ "#development" }>Development</a>
-					<a href={ "#plans" }>Plans</a>
+					<a href={ "#development" } style={ { display: "none" } } hidden>Development</a>
+					<a href={ "#plans" } style={ { display: "none" } } hidden>Plans</a>
 				</div>
 				
 				<Button iconLeft={ "fi fi-rr-angle-right" }

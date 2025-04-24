@@ -29,9 +29,10 @@
 
 			.pages {
 				width: 100%;
+				padding-inline: var(--spacing);
 				display: flex;
 				gap: var(--spacing);
-				justify-content: space-evenly;
+				justify-content: flex-start;
 			}
 
 			.pages a {
