@@ -507,7 +507,8 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 					flexDirection: "row",
 					alignItems: "flex-end",
 					borderTop: "var(--outline-width) solid var(--border-color)",
-					paddingBlock: "var(--spacing)"
+					marginTop: "var(--spacing)",
+					paddingTop: "calc(var(--spacing) * 2)"
 				} }>
 					<div style={ { flex: 1 } }>
 						<p>© simpleQ 2024</p>
