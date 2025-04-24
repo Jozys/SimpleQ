@@ -35,7 +35,7 @@
 	--background-color-secondary-light: #f5f5f5;
 
 	--bleed-shadow: drop-shadow(0 0 var(--spacing) var(--primary-color-50p));
-	--bleed-shadow-highlight: drop-shadow(0 0 var(--spacing) rgba(255, 225, 255, 1));
+	--bleed-shadow-highlight: drop-shadow(0 0 8px rgba(255, 225, 255, 0.4));
 
 	--box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 	--box-shadow-light: 0 0 5px rgba(0, 0, 0, 0.1);
