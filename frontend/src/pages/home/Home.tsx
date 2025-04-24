@@ -511,7 +511,7 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 					paddingTop: "calc(var(--spacing) * 2)"
 				} }>
 					<div style={ { flex: 1 } }>
-						<p>© simpleQ 2024</p>
+						<p>© simpleQ { (new Date()).getFullYear() }</p>
 						<a href={ "mailto:mail@simpleq.simplepeople.com" }>mail@simpleq.simplepeople.com</a>
 					</div>
 					<div style={ { flex: 1 } }>
