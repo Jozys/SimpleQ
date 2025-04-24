@@ -384,7 +384,7 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 								margin: "calc(var(--spacing) * -1)",
 								padding: "var(--spacing)"
 							} }>
-								<h1>Guest</h1>
+								<h2>Guest</h2>
 								<span className={ "badge badge-outline" }>Most Secure</span>
 							</div>
 							<hr style={ { opacity: 0 } }/>
@@ -417,7 +417,7 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 								margin: "calc(var(--spacing) * -1)",
 								padding: "var(--spacing)"
 							} }>
-								<h1>User</h1>
+								<h2>User</h2>
 							</div>
 							<hr style={ { opacity: 0 } }/>
 							<p>
@@ -460,7 +460,7 @@ export default function Home(props: { updateTheme: (theme: "system" | "dark" | "
 								margin: "calc(var(--spacing) * -1)",
 								padding: "var(--spacing)"
 							} }>
-								<h1>Pro</h1>
+								<h2>Pro</h2>
 								<span className={ "badge" }>Recommended</span>
 							</div>
 							<hr style={ { opacity: 0 } }/>
