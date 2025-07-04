@@ -1,3 +1,9 @@
+> [!WARNING]
+> Disclaimer: SimpleQ was a project for the lecture "Software Engineering" held in the Baden-Württemberg Cooperative State University (DHBW) in the course TINF22B2. It is not meant to be a realworld application. Consider this project as deprecated and not maintained.
+> The original repository is currently available under [this link](https://github.com/SE-TINF22B2/G6-SimpleQ)
+
+> [!NOTE]
+> One thing that was changed in contrast to the university project is the identity provider that is used. Originally it used a cloud instance from ORY, but for deployment purposes this was changed to Keycloak.
 
 <div align="center">
   <img width="100%" src="https://github.com/SE-TINF22B2/G6-SimpleQ/assets/95375836/385836e4-f625-4915-8640-b734c7695e9d">
@@ -35,7 +41,8 @@ Um die Nutzerinteraktivität zu fördern, bieten wir verschiedene Rollen an. Die
 - `/frontend`: Ordner für die Frontend-Applikation, [README-Frontend](https://github.com/SE-TINF22B2/G6-SimpleQ/blob/main/frontend/README.md)
 
 ## 🧾 Starten des Projektes - Entwicklung
-- `yarn setup`: Ausführung des Setups, installiert die benötigten Pakete für das Frontend und Backend, sowie die Datenbank 
+
+- `yarn setup`: Ausführung des Setups, installiert die benötigten Pakete für das Frontend und Backend, sowie die Datenbank
 - `yarn start tunnel`: Startet den ORY-Tunnel für die Authentifizierung [Siehe](./backend/README.md)
 - `yarn start-backend`: Startet den Webserver für das Backend im [Entwicklungsmodus](./backend/README.md)
 - `yarn start-frontend`: Startet den Webserver, der das Frontend liefert

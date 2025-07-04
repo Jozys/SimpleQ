@@ -1,5 +1,4 @@
 import { NestFactory } from '@nestjs/core';
-import * as sdk from '@ory/client';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -9,13 +8,6 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'DELETE'],
     credentials: true,
   });
-  global.ory = new sdk.FrontendApi(
-    new sdk.Configuration({
-      basePath:
-        process.env.ORY_URL || 'https://playground.projects.oryapis.com',
-    }),
-  );
-
   await app.listen(3000);
 }
 bootstrap();
