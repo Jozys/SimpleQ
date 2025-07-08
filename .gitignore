@@ -13,3 +13,4 @@
 *.css
 *.css.map
 frontend/.env
+.DS_Store
